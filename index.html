@@ -3,416 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ammar Mahzuz - Portfolio</title>
-    
-    <!-- Font Awesome untuk Ikon -->
+    <title>Modern POS & Kasir App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* ==================== CSS VARIABLES ==================== */
-        :root {
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary-color: #ec4899;
-            --accent-color: #f59e0b;
-            --bg-light: #ffffff;
-            --bg-light-alt: #f8fafc;
-            --text-light: #1a202c;
-            --text-light-alt: #4a5568;
-            --border-light: #e2e8f0;
-            --bg-dark: #0f172a;
-            --bg-dark-alt: #1e293b;
-            --text-dark: #f1f5f9;
-            --text-dark-alt: #cbd5e1;
-            --border-dark: #334155;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ==================== BASE STYLES ==================== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background-color: var(--bg-light);
-            transition: var(--transition-slow);
-            overflow-x: hidden;
-        }
-        body.dark-mode {
-            background-color: var(--bg-dark);
-            color: var(--text-dark);
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* ==================== NAVBAR ==================== */
-        .navbar {
-            position: sticky; top: 0; z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-        }
-        body.dark-mode .navbar {
-            background-color: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            display: flex; justify-content: space-between;
-            align-items: center; padding: 1rem 20px;
-        }
-
-        .nav-brand {
-            display: flex; align-items: center; gap: 0.75rem;
-            font-weight: bold; cursor: pointer; text-decoration: none;
-        }
-
-        .brand-icon {
-            width: 40px; height: 40px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 8px; display: flex; align-items: center;
-            justify-content: center; color: white;
-        }
-
-        .brand-text {
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .nav-menu { display: flex; gap: 2rem; align-items: center; }
-        .nav-link {
-            color: inherit; text-decoration: none; font-weight: 500;
-            position: relative; transition: var(--transition);
-        }
-        .nav-link.active, .nav-link:hover { color: var(--primary-color); }
-
-        .nav-right { display: flex; align-items: center; gap: 1rem; }
-        
-        .theme-toggle {
-            background: var(--bg-light-alt); border: none; width: 40px; height: 40px;
-            border-radius: 50%; cursor: pointer; color: inherit; transition: var(--transition);
-        }
-        body.dark-mode .theme-toggle { background: var(--bg-dark-alt); }
-
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-        .menu-toggle span { width: 25px; height: 3px; background: currentColor; border-radius: 2px; transition: 0.3s; }
-
-        /* ==================== HERO SECTION ==================== */
-        .hero {
-            padding: 100px 20px; min-height: 90vh; display: flex; align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; position: relative; overflow: hidden;
-        }
-        body.dark-mode .hero { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
-
-        .hero-content {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; width: 100%;
-            z-index: 1;
-        }
-
-        .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.1; }
-        .highlight { color: #fbbf24; }
-
-        .btn {
-            padding: 12px 28px; border-radius: 8px; text-decoration: none;
-            font-weight: 600; display: inline-block; transition: 0.3s;
-        }
-        .btn-primary { background: var(--primary-color); color: white; }
-        .btn-secondary { border: 2px solid white; color: white; margin-left: 1rem; }
-
-        .avatar-wrapper { position: relative; display: flex; justify-content: center; }
-        .avatar {
-            width: 250px; height: 250px; background: white; color: var(--primary-color);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 4rem; font-weight: 900; z-index: 2;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .float-card {
-            position: absolute; width: 60px; height: 60px; background: white;
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            color: var(--primary-color); font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            z-index: 3;
-        }
-
-        /* ==================== SECTIONS ==================== */
-        section { padding: 100px 20px; }
-        .section-header { text-align: center; margin-bottom: 3rem; }
-        .section-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .title-underline { width: 60px; height: 4px; background: var(--primary-color); margin: 0 auto; }
-
-        /* About Stats */
-        .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
-        .stat-item { text-align: center; padding: 2rem; background: var(--bg-light-alt); border-radius: 12px; }
-        body.dark-mode .stat-item { background: var(--bg-dark-alt); }
-        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--primary-color); }
-
-        /* Skills */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .skill-card { background: var(--bg-light-alt); padding: 2rem; border-radius: 12px; }
-        body.dark-mode .skill-card { background: var(--bg-dark-alt); }
-        .skill-bar { width: 100%; height: 8px; background: #ddd; border-radius: 4px; margin-top: 1rem; }
-        .skill-progress { height: 100%; background: var(--primary-color); width: 0; transition: 1s; }
-
-        /* Projects */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .project-card { border-left: 5px solid var(--primary-color); background: var(--bg-light-alt); padding: 2rem; border-radius: 12px; }
-        body.dark-mode .project-card { background: var(--bg-dark-alt); }
-
-        /* Contact */
-        .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .contact-item { text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-        .contact-icon-wrapper { width: 60px; height: 60px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-
-        /* ==================== ANIMATIONS & RESPONSIVE ==================== */
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        
-        .fade-in { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 768px) {
-            .hero-content { grid-template-columns: 1fr; text-align: center; }
-            .hero-buttons { display: flex; justify-content: center; }
-            .nav-menu {
-                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
-                background: var(--bg-light); flex-direction: column; justify-content: center;
-                transition: 0.3s; z-index: 999;
+        /* Desain Khusus Cetak Struk */
+        @media print {
+            body * {
+                visibility: hidden;
             }
-            body.dark-mode .nav-menu { background: var(--bg-dark-alt); }
-            .nav-menu.active { right: 0; }
-            .menu-toggle { display: flex; z-index: 1000; }
-            .about-stats { grid-template-columns: 1fr; }
+            #area-struk, #area-struk * {
+                visibility: visible;
+            }
+            #area-struk {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 80mm; /* Standar printer kertas thermal */
+                font-family: 'Courier New', Courier, monospace;
+                color: black;
+                background: white;
+                padding: 10px;
+            }
         }
     </style>
-
-    <script>
-        /* Dark Mode Pre-check */
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-        }
-    </script>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen print:bg-white">
 
-    <!-- Scroll Progress Bar -->
-    <div id="scrollProgressBar" style="position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #6366f1, #ec4899); width: 0%; z-index: 9999;"></div>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-brand">
-                <div class="brand-icon">AM</div>
-                <span class="brand-text">Ammar Mahzuz</span>
-            </a>
-            <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link">Beranda</a>
-                <a href="#about" class="nav-link">Tentang</a>
-                <a href="#skills" class="nav-link">Keahlian</a>
-                <a href="#projects" class="nav-link">Project</a>
-                <a href="#contact" class="nav-link">Hubungi</a>
-            </div>
-            <div class="nav-right">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="menu-toggle" id="menuToggle">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content container">
-            <div class="hero-text">
-                <h1 class="hero-title">Halo, Saya <br><span class="highlight">Ammar Mahzuz</span></h1>
-                <p style="font-size: 1.2rem; margin: 1.5rem 0;">Mahasiswa • Web Developer • UI/UX Designer • 3D Animator</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">Lihat Karya</a>
-                    <a href="#contact" class="btn btn-secondary">Hubungi Saya</a>
+    <div class="max-w-6xl mx-auto px-4 py-8 print:hidden">
+        
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-slate-200 pb-5">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-3 rounded-xl shadow-md shadow-indigo-200">
+                    <i class="fa-solid fa-cash-register text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight">SmartKasir</h1>
+                    <p class="text-sm text-slate-500">Sistem Pengolahan Data & Penjualan Modern</p>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="avatar-wrapper">
-                    <div class="avatar">AM</div>
-                    <div class="float-card" style="top: -20px; left: 0;"><i class="fas fa-code"></i></div>
-                    <div class="float-card" style="bottom: 20px; right: -10px;"><i class="fab fa-figma"></i></div>
-                </div>
+            <div class="text-right">
+                <p id="live-clock" class="text-sm font-medium text-slate-600 bg-white px-4 py-2 rounded-lg shadow-xs border border-slate-100"></p>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- About Section -->
-    <section id="about" class="container">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Tentang Saya</h2>
-            <div class="title-underline"></div>
-        </div>
-        <div style="text-align: center; max-width: 800px; margin: 0 auto;" class="fade-in">
-            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
-                Saya adalah mahasiswa prodi sistem informasi universitas komputama Cilacap yang sangat antusias dalam menambah ilmu baru. Ahli di bidang web development, UI/UX design dan animasi 3D.
-            </p>
-            <div class="about-stats">
-                <div class="stat-item">
-                    <div class="stat-number">3+</div>
-                    <p>Keahlian Utama</p>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5+</div>
-                    <p>Project Selesai</p>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <p>Dedikasi</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 sticky top-6">
+                    <h2 class="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2">
+                        <i class="fa-solid fa-box-open text-indigo-600"></i> Input Data Barang
+                    </h2>
+                    
+                    <form id="form-barang" onsubmit="event.preventDefault(); tambahBarang();">
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Nama Barang</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                                    <i class="fa-solid fa-tag"></i>
+                                </span>
+                                <input type="text" id="nama" required placeholder="Susu Kotak, Kemeja, dll." 
+                                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-indigo-500 focus:bg-white transition-all text-sm">
+                            </div>
+                        </div>
 
-    <!-- Skills Section -->
-    <section id="skills" style="background-color: var(--bg-light-alt);" class="dark-alt-bg">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Keahlian</h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card fade-in">
-                    <h3>JavaScript</h3>
-                    <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+                        <div class="grid grid-cols-2 gap-4 mb-5">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Harga (Rp)</label>
+                                <input type="number" id="harga" required placeholder="12500" min="0"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-indigo-500 focus:bg-white transition-all text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Jumlah</label>
+                                <input type="number" id="jumlah" required placeholder="1" min="1" value="1"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-indigo-500 focus:bg-white transition-all text-sm">
+                            </div>
+                        </div>
+
+                        <button type="submit" 
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md shadow-indigo-100 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </form>
                 </div>
-                <div class="skill-card fade-in">
-                    <h3>UI/UX (Figma)</h3>
-                    <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+            </div>
+
+            <div class="lg:col-span-2 flex flex-col gap-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex-1">
+                    <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-linear-to-r from-slate-50 to-white">
+                        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-shopping-basket text-indigo-600"></i> Daftar Transaksi
+                        </h2>
+                        <span id="badge-item" class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">0 Item</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/75 text-xs font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                                    <th class="p-4">Nama Produk</th>
+                                    <th class="p-4 text-right">Harga</th>
+                                    <th class="p-4 text-center">Jumlah</th>
+                                    <th class="p-4 text-right">Subtotal</th>
+                                    <th class="p-4 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabel-keranjang" class="divide-y divide-slate-100 text-sm">
+                                <tr>
+                                    <td colspan="5" class="text-center p-8 text-slate-400">
+                                        <i class="fa-solid fa-folder-open text-3xl mb-2 block text-slate-300"></i>
+                                        Belum ada data barang di keranjang.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="skill-card fade-in">
-                    <h3>Blender 3D</h3>
-                    <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-6">
+                        <div class="flex-1 bg-slate-50 p-4 rounded-xl flex justify-between items-center border border-slate-100">
+                            <div>
+                                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Pembayaran</p>
+                                <h3 id="total-bayar" class="text-2xl font-black text-slate-900 mt-1">Rp 0</h3>
+                            </div>
+                            <div class="text-slate-300 text-3xl pr-2">
+                                <i class="fa-solid fa-wallet"></i>
+                            </div>
+                        </div>
+                        <button onclick="prosesCetak()" 
+                            class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-md shadow-emerald-100 transition-all flex items-center justify-center gap-3 cursor-pointer">
+                            <i class="fa-solid fa-print text-lg"></i> Selesai & Cetak Struk
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="container">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Project Saya</h2>
-            <div class="title-underline"></div>
         </div>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <h3 style="margin-bottom: 1rem;">Website SIMAK</h3>
-                <p>Sistem Informasi Akademik Mahasiswa menggunakan teknologi web modern.</p>
-            </div>
-            <div class="project-card fade-in">
-                <h3 style="margin-bottom: 1rem;">Animasi 3D Portfolio</h3>
-                <p>Koleksi animasi 3D profesional yang dibuat menggunakan Blender.</p>
-                <a href="https://drive.google.com/drive/folders/1o5R6jsomn0YyhfjS1Jc6-o5woUTYqU-8" target="_blank" style="color: var(--primary-color); display: block; margin-top: 1rem;">Buka Drive <i class="fas fa-external-link-alt"></i></a>
-            </div>
+    </div>
+
+    <div id="area-struk" class="hidden">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold;">SMARTKASIR DIGITAL</h3>
+            <p style="margin: 3px 0; font-size: 11px;">Maju Bersama Teknologi Modern<br>Telp: 0812-9999-8888</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" style="background-color: var(--bg-light-alt);">
-        <div class="container fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Hubungi Saya</h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="contact-links">
-                <a href="mailto:ammarmahzuz@mail.com" class="contact-item">
-                    <div class="contact-icon-wrapper"><i class="fas fa-envelope"></i></div>
-                    <span>Email</span>
-                </a>
-                <a href="https://api.whatsapp.com/send/?phone=6285643094039" target="_blank" class="contact-item">
-                    <div class="contact-icon-wrapper"><i class="fab fa-whatsapp"></i></div>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://www.instagram.com/rammahr16" target="_blank" class="contact-item">
-                    <div class="contact-icon-wrapper"><i class="fab fa-instagram"></i></div>
-                    <span>Instagram</span>
-                </a>
-            </div>
+        
+        <div style="border-top: 1px dashed #000; margin: 8px 0;"></div>
+        <p style="margin: 0; font-size: 11px;">Waktu: <span id="struk-waktu"></span></p>
+        <div style="border-top: 1px dashed #000; margin: 8px 0;"></div>
+        
+        <table style="width: 100%; font-size: 11px; border-collapse: collapse;" id="struk-items">
+            </table>
+        
+        <div style="border-top: 1px dashed #000; margin: 8px 0;"></div>
+        
+        <table style="width: 100%; font-size: 11px;">
+            <tr>
+                <td>Total Qty:</td>
+                <td style="text-align: right;" id="struk-total-qty">0</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>TOTAL BAYAR:</td>
+                <td style="text-align: right;" id="struk-total-bayar">Rp 0</td>
+            </tr>
+        </table>
+        
+        <div style="border-top: 1px dashed #000; margin: 8px 0;"></div>
+        <div style="text-align: center; font-size: 10px; margin-top: 10px;">
+            <p style="margin: 0;">Terima Kasih Atas Kunjungan Anda</p>
+            <p style="margin: 3px 0 0 0;">Barang yang dibeli tidak dapat ditukar</p>
         </div>
-    </section>
+    </div>
 
-    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--border-light);">
-        <p>&copy; 2026 Ammar Mahzuz. All rights reserved.</p>
-    </footer>
-
-    <!-- Scripts -->
     <script>
-        // 1. Theme Toggle Logic
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const themeIcon = themeToggle.querySelector('i');
+        let dataKeranjang = [];
 
-        // Initial setup from localStorage
-        if(localStorage.getItem('theme') === 'dark') {
-            body.classList.add('dark-mode');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        // Fungsi format Rupiah modern
+        function formatIDR(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
         }
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const isDark = body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            themeIcon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
-        });
+        // Tampilkan jam waktu nyata di header
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('live-clock').innerHTML = `<i class="fa-regular fa-clock text-indigo-500 mr-1.5"></i> ${now.toLocaleString('id-ID')}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        // 2. Mobile Menu Logic
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+        // Fungsi Tambah Barang ke Keranjang
+        function tambahBarang() {
+            const namaInput = document.getElementById('nama');
+            const hargaInput = document.getElementById('harga');
+            const jumlahInput = document.getElementById('jumlah');
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+            const nama = namaInput.value.trim();
+            const harga = parseFloat(hargaInput.value);
+            const jumlah = parseInt(jumlahInput.value);
 
-        // 3. Intersection Observer (Fade In & Skills)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Jika itu skill progress
-                    if(entry.target.classList.contains('skill-progress')) {
-                        entry.target.style.width = entry.target.dataset.width;
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
+            if (!nama || isNaN(harga) || isNaN(jumlah) || jumlah <= 0) return;
 
-        document.querySelectorAll('.fade-in, .skill-progress').forEach(el => observer.observe(el));
+            // Cek apakah barang sudah ada di keranjang (Case Insensitive)
+            const indexSama = dataKeranjang.findIndex(item => item.nama.toLowerCase() === nama.toLowerCase());
 
-        // 4. Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("scrollProgressBar").style.width = scrolled + "%";
-        });
-
-        // 5. Parallax for Hero Icons
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const cards = document.querySelectorAll('.float-card');
-                    const x = (e.clientX / window.innerWidth) - 0.5;
-                    const y = (e.clientY / window.innerHeight) - 0.5;
-                    cards.forEach(card => {
-                        card.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
-                    });
-                    ticking = false;
+            if (indexSama > -1) {
+                // Jika ada, cukup tambahkan kuantitasnya
+                dataKeranjang[indexSama].jumlah += jumlah;
+                dataKeranjang[indexSama].subtotal = dataKeranjang[indexSama].jumlah * dataKeranjang[indexSama].harga;
+            } else {
+                // Jika baru, push ke array
+                dataKeranjang.push({
+                    nama: nama,
+                    harga: harga,
+                    jumlah: jumlah,
+                    subtotal: harga * jumlah
                 });
-                ticking = true;
             }
-        });
+
+            // Reset Form & Fokus kembali ke input Nama
+            namaInput.value = '';
+            hargaInput.value = '';
+            jumlahInput.value = '1';
+            namaInput.focus();
+
+            renderAplikasi();
+        }
+
+        // Fungsi untuk tombol ubah jumlah (+ dan -) di dalam tabel
+        function ubahKuantitas(index, nilaiPerubahan) {
+            dataKeranjang[index].jumlah += nilaiPerubahan;
+            
+            if (dataKeranjang[index].jumlah <= 0) {
+                // Jika jumlah 0 atau minus, hapus barang otomatis
+                hapusBarang(index);
+            } else {
+                dataKeranjang[index].subtotal = dataKeranjang[index].jumlah * dataKeranjang[index].harga;
+                renderAplikasi();
+            }
+        }
+
+        // Fungsi Hapus Barang
+        function hapusBarang(index) {
+            dataKeranjang.splice(index, 1);
+            renderAplikasi();
+        }
+
+        // Sinkronisasi data ke tampilan HTML
+        function renderAplikasi() {
+            const tabelBody = document.getElementById('tabel-grid');
+            const tabelContainer = document.getElementById('tabel-keranjang');
+            
+            if (dataKeranjang.length === 0) {
+                tabelContainer.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center p-8 text-slate-400">
+                            <i class="fa-solid fa-folder-open text-3xl mb-2 block text-slate-300"></i>
+                            Belum ada data barang di keranjang.
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('badge-item').innerText = '0 Item';
+                document.getElementById('total-bayar').innerText = 'Rp 0';
+                return;
+            }
+
+            let totalBayar = 0;
+            let totalQty = 0;
+            let htmlKoleksi = '';
+
+            dataKeranjang.forEach((item, index) => {
+                totalBayar += item.subtotal;
+                totalQty += item.jumlah;
+
+                htmlKoleksi += `
+                    <tr class="hover:bg-slate-50/80 transition-all">
+                        <td class="p-4 font-semibold text-slate-900">${item.nama}</td>
+                        <td class="p-4 text-right text-slate-600">${formatIDR(item.harga)}</td>
+                        <td class="p-4">
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="ubahKuantitas(${index}, -1)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-bold flex items-center justify-center transition-all cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <span class="w-8 text-center font-bold text-slate-800">${item.jumlah}</span>
+                                <button onclick="ubahKuantitas(${index}, 1)" class="w-7 h-7 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-lg font-bold flex items-center justify-center transition-all cursor-pointer">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-4 text-right font-bold text-slate-900">${formatIDR(item.subtotal)}</td>
+                        <td class="p-4 text-center">
+                            <button onclick="hapusBarang(${index})" class="text-rose-500 hover:text-rose-700 hover:bg-rose-50 w-8 h-8 rounded-lg transition-all cursor-pointer">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tabelContainer.innerHTML = htmlKoleksi;
+            document.getElementById('badge-item').innerText = `${totalQty} Item`;
+            document.getElementById('total-bayar').innerText = formatIDR(totalBayar);
+        }
+
+        // Fungsi Memproses Cetak Struk
+        function prosesCetak() {
+            if (dataKeranjang.length === 0) {
+                alert('Keranjang belanja masih kosong!');
+                return;
+            }
+
+            const strukItemsContainer = document.getElementById('struk-items');
+            strukItemsContainer.innerHTML = '';
+            
+            let totalBayar = 0;
+            let totalQty = 0;
+
+            // Atur waktu transaksi pada struk
+            document.getElementById('struk-waktu').innerText = new Date().toLocaleString('id-ID');
+
+            // Isi tabel struk
+            dataKeranjang.forEach(item => {
+                totalBayar += item.subtotal;
+                totalQty += item.jumlah;
+
+                strukItemsContainer.innerHTML += `
+                    <tr>
+                        <td colspan="2" style="padding-top: 5px; font-weight: bold;">${item.nama}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #333;">${item.jumlah} x ${formatIDR(item.harga)}</td>
+                        <td style="text-align: right; vertical-align: bottom;">${formatIDR(item.subtotal)}</td>
+                    </tr>
+                `;
+            });
+
+            // Isi nilai total ringkasan struk
+            document.getElementById('struk-total-qty').innerText = totalQty;
+            document.getElementById('struk-total-bayar').innerText = formatIDR(totalBayar);
+
+            // Trigger sistem cetak print browser
+            window.print();
+        }
     </script>
 </body>
 </html>
-
